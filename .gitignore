@@ -1,0 +1,19 @@
+.vercel
+*.log
+*.pyc
+__pycache__
+
+# Environments 
+.env
+.env.local
+.env.production
+.env.staging
+.env.development
+.venv 
+env/ 
+venv/ 
+ENV/ 
+env.bak/ 
+venv.bak/ 
+
+/env/

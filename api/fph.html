@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAX Health Navigator</title>
+  <link rel="shortcut icon" type="image/png" href="https://i.ibb.co/DGGw2MD/image.png" />
+  <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script crossorigin src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</head>
+<style>
+   body {
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    background: linear-gradient(140deg, #10121B 0%, #060606 100%);
+  }
+  #root {
+    background-color: #fff;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 800px;
+    padding: 40px;
+    color:  rgb(0, 7, 102);
+    border-radius: 30px;
+  }
+
+  h1 {
+    text-align: center;
+    font-family: Arial,sans-serif;
+    color: #000000;
+    font-size:30px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 10px;
+    color: #000000;
+    font-weight: bolder;
+  }
+
+  input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 2px solid black;
+    font-weight: bold;
+  }
+
+  button {
+    background: linear-gradient(85deg, #ff2a86, #ff9900);
+    font-weight: bolder;
+    font-size: larger;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  h2 {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  p {
+    text-align: center;
+    font-weight: bold;
+    color: #000000;
+  }
+
+  ul {
+  cursor: pointer;
+  display: inline-table;
+  padding: 20px;
+  margin: 0;
+  margin-top: -50px;
+}
+
+li {
+  padding: 5px;
+  margin: 5px;
+}
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+footer pre {
+  margin: 0;
+  padding: 10px;
+  color: #fff;
+}
+
+
+a {
+  text-decoration: none;
+  color: #ffffff; 
+}
+
+.sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #000000;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+        .sidebar a {
+            text-align:left;
+            padding: 20px;
+            text-decoration: none;
+            font-weight:bold;
+            font-size: larger;
+            color: #ffffff;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidebar .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            background-color: transparent !important;
+            margin-left: 50px;
+        }
+
+        .openbtn {
+            font-size: 20px;
+            margin-top: -75px;
+            cursor: pointer;
+            margin-left: -1px;
+        }
+
+#main {
+        transition: margin-left .5s;
+        padding: 1px;
+        }
+.h{
+  margin-top: -20px;
+  font-size: 25px;
+}
+.ts{
+  margin-bottom:-40px;
+  padding: 20px;
+}
+#google_translate_element {
+  display: flex;
+  margin-top: -10px;
+}
+
+.goog-te-combo {
+  border-radius: 10px;
+  padding: 10px;
+  cursor: pointer;
+}
+.goog-te-gadget {
+  color: #000000; 
+}
+.popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .popup-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+        }
+        @keyframes rotate360 {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        .bi-opencollective {
+            animation: rotate360 1s linear infinite;
+            margin-right: 10px;
+        }
+        .popup-content p {
+            margin: 0;
+        }
+</style>
+<body>
+  <header><h1><a href="d.html"><img style="width: 55px;margin-top: -30px;" src="https://i.ibb.co/VBK3rpb/1-removebg-preview.png" alt="FAX"></a></header>
+  <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()" style="color: #ffffff;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+            </svg>
+        </a>        
+        <a href="index_fab.html">FAX</a>
+        <a id="login-signup" href="login_fph.html">Login / Sign Up</a>
+        <a><p id="google_translate_element"></p></a>
+    </div>
+    <div id="main">
+        <label  class="openbtn" onclick="openNav()"><svg width="20" height="20">
+          <path d="M3 8C3 7.44772 3.44772 7 4 7H20C20.5523 7 21 7.44772 21 8C21 8.55228 20.5523 9 20 9H4C3.44772 9 3 8.55228 3 8ZM3 16C3 15.4477 3.44772 15 4 15H14C14.5523 15 15 15.4477 15 16C15 16.5523 14.5523 17 14 17H4C3.44772 17 3 16.5523 3 16Z" fill="white"></path>
+      </svg>      
+        </label>
+    </div>
+  <div id="root"></div>
+  <p style="color: #fff; text-align: center;padding: 10px;">
+    Welcome to FAX Personal Healthcare (V 2.4). This is the testing phase developed by FAB (AB - NC) where we are experimenting and refining our features. 
+    Explore, enjoy, and stay tuned for more updates!
+  </p>
+  <p style="color: #fff; padding: 10px;">"Our advanced healthcare platform is adept at detecting and diagnosing over 1250+ diseases, ensuring comprehensive and accurate support for your health needs."
+</p>
+<p style="color: #fff; text-align: center;">" Fax can make mistakes. It's like a first aid step to acquire healthcare info. "</p>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    const SymptomChecker = () => {
+      const [symptoms, setSymptoms] = useState('');
+    const [prediction, setPrediction] = useState('');
+    const [precaution, setPrecaution] = useState('');
+    const [drug, setDrug] = useState('');
+    const [diagnosis, setDiagnosis] = useState('');
+    const [randomDisease, setRandomDisease] = useState('');
+    const [suggestions, setSuggestions] = useState([]);
+    const [isAnalyzing, setIsAnalyzing] = useState(false);
+
+        const updateSuggestions = (inputSymptoms) => {
+            const jsonFilePath = 'fax.json';
+            fetch(jsonFilePath)
+                .then((response) => response.json())
+                .then((data) => {
+                    const matchedSuggestions = Object.keys(data).filter((disease) =>
+                        disease.toLowerCase().includes(inputSymptoms.toLowerCase())
+                    );
+
+                    const relatedDiseases = Object.keys(data).slice(0, 5).filter((disease) =>
+                        disease.toLowerCase() !== inputSymptoms.toLowerCase()
+                    );
+
+                    setSuggestions([...new Set([...matchedSuggestions, ...relatedDiseases])]);
+                })
+                .catch((error) => console.error('Error updating suggestions:', error));
+        };
+
+        const capitalizeFirstLetter = (sentence) => {
+            return sentence.charAt(0).toUpperCase() + sentence.slice(1);
+        };
+
+        const handleSuggestionsClick = (suggestion) => {
+            setSymptoms(suggestion);
+            setSuggestions([]);
+        };
+
+        const handleKeyPress = (e) => {
+            if (e.key === 'Enter') {
+                predictDisease();
+            }
+        };
+
+        const predictDisease = async () => {
+    setIsAnalyzing(true); // Show analyzing popup
+    try {
+        const jsonFilePath = 'fax.json';
+        const response = await fetch(jsonFilePath);
+        const jsonData = await response.json();
+
+        setPrediction('');
+        setPrecaution('');
+        setDrug('');
+        setDiagnosis('');
+
+        const matchedDisease = Object.keys(jsonData).find(disease =>
+            disease.toLowerCase() === symptoms.toLowerCase()
+        );
+
+        if (matchedDisease) {
+            const { symptoms, precautions, drugs, diagnosis } = jsonData[matchedDisease];
+            setPrediction(symptoms);
+            setPrecaution(precautions);
+            setDrug(drugs);
+            setDiagnosis(diagnosis);
+        } else {
+            setPrediction('Prediction not found');
+        }
+    } catch (error) {
+        console.error('Error predicting disease:', error);
+    } finally {
+        setTimeout(() => {
+            setIsAnalyzing(false); // Hide analyzing popup
+        }, 2000);
+    }
+};
+
+        const getRandomDiseaseName = () => {
+            const jsonFilePath = 'fax.json';
+            fetch(jsonFilePath)
+                .then((response) => response.json())
+                .then((data) => {
+                    const diseases = Object.keys(data);
+                    const randomIndex = Math.floor(Math.random() * diseases.length);
+                    const randomDisease = diseases[randomIndex];
+                    setRandomDisease(randomDisease);
+                })
+                .catch((error) => console.error('Error fetching random disease:', error));
+        };
+
+        useEffect(() => {
+            getRandomDiseaseName();
+        }, []);
+
+        const handleRandomDiseaseClick = () => {
+            setSymptoms(randomDisease);
+        };
+
+
+        
+        return (
+    <div>
+        <h1 className='h'>Health Navigator</h1>
+        <label>
+            Enter Disease Name:
+            <input
+                type="text"
+                value={symptoms}
+                onChange={(e) => {
+                    setSymptoms(e.target.value);
+                    updateSuggestions(e.target.value);
+                }}
+                onKeyPress={handleKeyPress}
+                placeholder="Drop your text (ctrl+b)"
+                id="searchBox"
+            />
+        </label>
+        {suggestions.length > 0 && symptoms !== '' && (
+            <ul>
+                {suggestions.map((suggestion, index) => (
+                    <li key={index} onClick={() => handleSuggestionsClick(suggestion)}>
+                        {suggestion}
+                    </li>
+                ))}
+            </ul>
+        )}
+        <button onClick={() => predictDisease()}>Get Info</button>
+        {isAnalyzing && (
+            <div className="popup">
+                <div className="popup-content">
+                    <div className="svg-container">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="30"
+                            height="30"
+                            fill="black"
+                            className="bi bi-opencollective"
+                            viewBox="0 0 16 16"
+                        >
+                            <path
+                                fillOpacity=".4"
+                                d="M12.995 8.195c0 .937-.312 1.912-.78 2.693l1.99 1.99c.976-1.327 1.6-2.966 1.6-4.683 0-1.795-.624-3.434-1.561-4.76l-2.068 2.028c.468.781.78 1.679.78 2.732z"
+                            />
+                            <path d="M8 13.151a4.995 4.995 0 1 1 0-9.99c1.015 0 1.951.273 2.732.82l1.95-2.03a7.805 7.805 0 1 0 .04 12.449l-1.951-2.03a5.07 5.07 0 0 1-2.732.781z" />
+                        </svg>
+                    </div>
+                    <p>Analyzing...</p>
+                </div>
+            </div>
+        )}
+
+        {!isAnalyzing && (
+            <div>
+                {symptoms && (
+                    <div>
+                        <h2>Disease Name</h2>
+                        <p>{capitalizeFirstLetter(symptoms)}</p>
+                    </div>
+                )}
+
+                {prediction && (
+                    <div>
+                        <h2>Symptom:</h2>
+                        <p>{capitalizeFirstLetter(prediction)}</p>
+                        <h2>Precaution:</h2>
+                        <p>{capitalizeFirstLetter(precaution)}</p>
+                        <h2>Drug to Cure:</h2>
+                        <p>{capitalizeFirstLetter(drug)}</p>
+                        <h2>Diagnosis:</h2>
+                        <p>{capitalizeFirstLetter(diagnosis)}</p>
+                    </div>
+                )}
+
+                {randomDisease && (
+                    <div>
+                        <p
+                            className='ts'
+                            style={{ cursor: 'pointer', textDecoration: 'none', color: 'black' }}
+                            onClick={handleRandomDiseaseClick}
+                        >
+                            Top Search: {capitalizeFirstLetter(randomDisease)}
+                        </p>
+                    </div>
+                )}
+            </div>
+        )}
+    </div>
+);
+  }
+    ReactDOM.render(<SymptomChecker />, document.getElementById('root'));
+
+    document.addEventListener('keydown', function (event) {
+        if (event.ctrlKey && event.key === 'b') {
+            document.getElementById('searchBox').focus();
+        }
+    });
+
+    function openNav() {
+        document.getElementById('mySidebar').style.width = '350px';
+        document.getElementById('main').style.marginLeft = '250px';
+    }
+
+    function closeNav() {
+        document.getElementById('mySidebar').style.width = '0';
+        document.getElementById('main').style.marginLeft = '0';
+    }
+
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+            { pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL },
+            'google_translate_element'
+        );
+    }
+</script>
+<style>.c{display:none;position:fixed;bottom:0;left:0;right:0;background:#ff5555;color:#fff;align-items:center;justify-content:center}.spinner{width:20px;height:20px;border:2px solid transparent;border-top:2px solid #fff;border-radius:50%;animation:spin 1s linear infinite;margin-right:10px}@keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}</style></head>
+  <body><div class="c" id="no-internet-card"><div class="spinner"></div><h4>Failed to load data, retrying....</h4></div><script>function updateOnlineStatus(){document.getElementById('no-internet-card').style.display=navigator.onLine?'none':'flex'}window.addEventListener('online',updateOnlineStatus);window.addEventListener('offline',updateOnlineStatus);updateOnlineStatus();</script></body>  
+</html>

@@ -7,10 +7,21 @@ import io
 import re
 from flask_sqlalchemy import SQLAlchemy
 from authlib.integrations.flask_client import OAuth
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
+# Debug: Check if environment variables are loaded (remove in production)
+print("Environment variables check:")
+print(f"GOOGLE_CLIENT_ID: {'✓ Set' if os.environ.get('GOOGLE_CLIENT_ID') else '✗ Missing'}")
+print(f"GOOGLE_CLIENT_SECRET: {'✓ Set' if os.environ.get('GOOGLE_CLIENT_SECRET') else '✗ Missing'}")
+print(f"GOOGLE_API_KEY: {'✓ Set' if os.environ.get('GOOGLE_API_KEY') else '✗ Missing'}")
+print(f"FLASK_SECRET_KEY: {'✓ Set' if os.environ.get('FLASK_SECRET_KEY') else '✗ Missing'}")
 
 app = Flask(__name__)
 
-app.secret_key = 'fax2003'
+app.secret_key = os.environ.get('FLASK_SECRET_KEY', 'default-secret-key-change-in-production')
 
 oauth = OAuth(app)
 google = oauth.register(
@@ -233,7 +244,12 @@ def render_html(page):
 def fax_data():
     return send_file('fax.json', as_attachment=True, mimetype='application/json')
 
-GOOGLE_API_KEY = 'AIzaSyDjJ7N0NBZcJ1WWmCwF_SD7GK1agXba_pI'
+GOOGLE_API_KEY = os.environ.get('GOOGLE_API_KEY')
+if not GOOGLE_API_KEY:
+    print("❌ ERROR: GOOGLE_API_KEY environment variable is not set!")
+    print("Please check your .env file and ensure it contains:")
+    print("GOOGLE_API_KEY=your_actual_google_api_key_here")
+    raise ValueError("GOOGLE_API_KEY environment variable is required. Please check your .env file.")
 genai.configure(api_key=GOOGLE_API_KEY)
 model = genai.GenerativeModel('gemini-1.5-flash')
 def clean_markdown(text):
@@ -421,7 +437,7 @@ def submit():
 
     return jsonify(response)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://default:1QYEWuax8BTr@ep-soft-union-a46sh4wp.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///app.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)

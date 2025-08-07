@@ -17,3 +17,59 @@ env.bak/
 venv.bak/ 
 
 /env/
+
+# Security and API Keys
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.csr
+*.der
+*.p8
+*.pem
+*.key
+*.pub
+*.id_rsa
+*.id_rsa.pub
+*.id_ed25519
+*.id_ed25519.pub
+
+# Configuration files that might contain secrets
+config.json
+secrets.json
+credentials.json
+service-account.json
+firebase-key.json
+google-credentials.json
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Log files
+logs/
+*.log
